@@ -202,6 +202,22 @@ module FFMPEG
           expect(converted).to eq(['-map', '0:0', '-map', '0:1'])
         end
       end
+  
+      it "should convert x264_vprofile_level" do
+        expect(EncodingOptions.new(x264_vprofile_level: 4).to_a).to eq(%w(-level 4))
+      end
+      
+      it "should convert constant_rate_factor" do
+        expect(EncodingOptions.new(constant_rate_factor: 30).to_a).to eq(%w(-crf 30))
+      end
+      
+      it "should convert reference_frames" do
+        expect(EncodingOptions.new(reference_frames: 5).to_a).to eq(%w(-refs 5))
+      end
+      
+      it "should convert strict" do
+        expect(EncodingOptions.new(strict: true).to_a).to eq(%w(-strict -2))
+      end
     end
   end
 end
